@@ -1,0 +1,76 @@
+#Loving the Debian in me
+alias apt-get='sudo port'
+
+#Please stop my itchy fingers
+alias rm='rm -i'
+
+alias mercury='/usr/bin/ssh -Y uesu@mercury.bic.nus.edu.sg'
+alias water='ssh -Y water.bic.nus.edu.sg'
+alias anqi='ssh -Y uesu@172.18.53.108'
+alias pii='ssh -Y pi@103.247.132.221'
+alias piiloc='ssh -Y pi@192.168.1.112'
+alias gpugold='ssh -Y a0046510@172.25.192.196'
+
+#Mounting
+##Tunnelling
+alias m2a='ssh -f mercury.bic.nus.edu.sg -L 23000:172.18.53.108:22 -N && sshfs -o cache=no -p 23000 localhost:. /Users/uesu/anqi/'
+alias m2w='ssh -f mercury.bic.nus.edu.sg -L 22000:water.bic.nus.edu.sg:22 -N && sshfs -o cache=no -p 22000 localhost:. /Users/uesu/water/'
+alias m2g='ssh -f mercury.bic.nus.edu.sg -L 23000:172.25.192.196:22 -N && sshfs -o cache=no -p 23000 a0046510@127.0.0.1:/ /Users/uesu/goldgpu'
+alias m2c='ssh -f mercury.bic.nus.edu.sg -L 21000:wesley@cancer.bic.nus.edu.sg:22 -N && sshfs -o cache=no -p 21000 localhost:. /Users/uesu/cancer/'
+##Direct
+alias mountanqi='sshfs -o cache=no 172.18.53.108:. /Users/uesu/anqi'
+alias mountwater='sshfs -o cache=no water.bic.nus.edu.sg:. /Users/uesu/water'
+alias mountcancer='sshfs -o cache=no wesley@cancer.bic.nus.edu.sg:. /Users/uesu/cancer'
+alias mountpi='sshfs -o cache=no pi@103.247.132.221:/ /Users/uesu/pi/'
+alias mountpilocal='sshfs  -o cache=no pi@192.168.1.112:/ /Users/uesu/pi/'
+alias mountgold='sshfs  -o cache=no a0046510@172.25.192.196:/ /Users/uesu/goldgpu'
+alias mountmercury='sshfs  -o cache=no mercury.bic.nus.edu.sg:. /Users/uesu/mercury'
+
+#
+alias pdfc="gs -dNOPAUSE -sDEVICE=pdfwrite -sOUTPUTFILE=combined.pdf -dBATCH *.pdf"
+alias rsync2hd="rsync -aHP /Users/uesu/Dropbox/Shop /Users/uesu/pi/mnt/altTB/Backup/"
+#GPU
+alias nvcc='/usr/local/cuda/bin/nvcc -ccbin=/usr/bin/clang'
+#Haskell
+alias hoogle='/Users/uesu/Library/Haskell/ghc-7.6.3/lib/hoogle-4.2.32/bin/hoogle'
+
+#When all else fails
+#ssh uesu@mercury.bic.nus.edu.sg -o "ProxyCommand=nc -X connect -x 203.130.193.186:80  %h %p"
+
+##
+# Your previous /Users/uesu/.bash_profile file was backed up as /Users/uesu/.bash_profile.macports-saved_2012-08-28_at_00:05:21
+##
+# MacPorts Installer addition on 2012-08-28_at_00:05:21: adding an appropriate PATH variable for use with MacPorts.
+#export PATH=/usr/bin:/opt/local/bin:/opt/local/sbin:$PATH:$HOME:/usr/local/bin
+export LC_ALL=en_US.UTF-8
+export LANG=en_US.UTF-8
+export LANGUAGE=en_US.UTF-8
+export PATH=/opt/local/bin:/opt/local/sbin:/bin:/usr/bin:/usr/sbin:/sbin:/usr/local/bin:/opt/X11/bin:/usr/local/git/bin:/usr/local/go/bin:/usr/texbin:/Users/uesu
+#R library
+export R_LIBS_USER=/Users/uesu/Downloads/R-3.0.1/src/library
+
+export PERL5LIB="/Users/uesu/perl5/lib/perl5"
+
+export CUDA_HOME=/usr/local/cuda
+export LD_LIBRARY_PATH=/usr/local/cuda/lib:$LD_LIBRARY_PATH
+
+# Finished adapting your PATH environment variable for use with MacPorts.
+export TERM=xterm-256color
+export CLICOLOR=1
+export LSCOLORS=GxFxCxDxBxegedabagaced
+
+#Marks##################################################
+export MARKPATH=$HOME/.marks
+function jump { 
+        cd -P "$MARKPATH/$1" 2>/dev/null || echo "No such mark: $1"
+}
+function mark { 
+        mkdir -p "$MARKPATH"; ln -s "$(pwd)" "$MARKPATH/$1"
+}
+function unmark { 
+        rm -i "$MARKPATH/$1"
+}
+function marks {
+        \ls -l "$MARKPATH" | tail -n +2 | sed 's/  / /g' | cut -d' ' -f9- | awk -F ' -> ' '{printf "%-10s -> %s\n", $1, $2}'
+}
+############################################################
