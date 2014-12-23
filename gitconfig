@@ -1,0 +1,19 @@
+[user]
+    name    = etheleon
+    email   = pic_y2k@hotmail.com
+
+[color]
+    ui = auto
+[push]
+    default=simple
+[branch]
+    autosetuprebase=always
+[rerere]
+    enabled=true
+[alias]
+    s  = status -s
+    lg = log --oneline --decorate --all --graph
+[github]
+  user = etheleon
+[core]
+    autocrlf=input
